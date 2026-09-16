@@ -1,0 +1,1316 @@
+/*
+  Personal website stylesheet
+
+  How to edit this file:
+  - Colors are controlled in :root below. Change a color once there and it updates everywhere.
+  - Font sizes are usually named under the section they affect, for example .hero-copy h1.
+  - Spacing is usually padding, margin, gap, min-height, or width.
+  - Desktop styles come first. Tablet/mobile overrides are near the bottom inside @media blocks.
+  - If a desktop change does not show on mobile, check the matching @media rule near the bottom.
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap");
+
+/* Global design tokens: change these to update the whole site color palette. */
+:root {
+  /* Main brand color used for headings, nav, icons, buttons, and borders. */
+  --navy: #062767;
+  /* Darker navy, available when stronger contrast is needed. */
+  --navy-dark: #041b4b;
+  /* Cream section background used in CV, Research, Contact, and header. */
+  --cream: #fff9e6;
+  /* Slightly deeper cream, available for alternate sections. */
+  --cream-deep: #fff3cd;
+  /* Main page background. */
+  --paper: #fff9e6;
+  /* Default text color. */
+  --ink: #08245f;
+  /* Softer blue for secondary text. */
+  --muted: #31528b;
+  /* Accent color used for hover states and active nav links. */
+  --teal: #0f6f7f;
+  /* Form field underline color. */
+  --line: rgba(6, 39, 103, 0.35);
+}
+
+/* Makes width/height calculations easier and more predictable. */
+* {
+  box-sizing: border-box;
+}
+
+/* Smooth scrolling for anchor links like #contact. */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Whole-site default font and background.
+   Change font-family here to change the font everywhere. */
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Remove default link underline; links inherit the surrounding text color. */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Shared Header
+   Appears at the top of index.html, cv.html, and research.html.
+   Change min-height for header height, padding for header inner spacing,
+   and background for the cream header color. */
+.site-header {
+  display: flex;
+  min-height: 158px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 44px min(6vw, 74px);
+  background: var(--paper);
+  border-bottom: 1px solid rgba(39, 34, 33, 0.1);
+  box-shadow: 0 18px 54px rgba(39, 34, 33, 0.08);
+}
+
+/* Left brand block: icon plus name/title. */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Abstract logo mark in the header.
+   Change width/height to resize the logo. Change background for logo color. */
+.brand-mark {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  background: var(--navy);
+  border-radius: 58% 42% 54% 46%;
+}
+
+/* Small extra circle attached to the logo mark. */
+.brand-mark::after {
+  position: absolute;
+  right: -5px;
+  bottom: 1px;
+  width: 18px;
+  height: 18px;
+  content: "";
+  background: var(--navy);
+  border-radius: 50%;
+}
+
+/* Text stack next to the header logo. */
+.brand-copy {
+  display: grid;
+  gap: 3px;
+}
+
+/* Header name text. Change font-size to resize your name in the header. */
+.brand-copy strong {
+  color: var(--navy);
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* Header subtitle text, currently "PhD Student". */
+.brand-copy span {
+  color: var(--navy);
+  font-size: 15px;
+  line-height: 1.1;
+}
+
+/* Header navigation links.
+   Change gap for distance between links, font-size for nav text size. */
+.site-nav {
+  display: flex;
+  gap: 44px;
+  padding-top: 0;
+  color: var(--navy);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* Smooth color change when hovering nav links. */
+.site-nav a {
+  transition: color 140ms ease;
+}
+
+/* Nav hover color. */
+.site-nav a:hover {
+  color: var(--teal);
+}
+
+/* Active page nav link, used on cv.html and research.html. */
+.site-nav a[aria-current="page"] {
+  color: var(--teal);
+}
+
+/* Prevents wide content from creating horizontal scrolling. */
+main {
+  overflow: hidden;
+}
+
+/* Home Page: Hero Section
+   Controls the large portrait + name section on index.html.
+   Change grid-template-columns to adjust photo/text widths.
+   Change gap to move photo and text closer/farther apart.
+   Change min-height and padding to make the section taller/shorter. */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(320px, 520px) minmax(340px, 560px);
+  gap: 84px;
+  align-items: center;
+  justify-content: center;
+  min-height: 768px;
+  padding: 96px 44px 86px;
+}
+
+/* Aligns portrait block inside the hero grid. */
+.portrait-panel {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Main homepage photo frame.
+   Change width to resize the frame:
+   - smaller: width: min(430px, 100%);
+   - larger:  width: min(560px, 100%);
+   aspect-ratio controls shape. 1 makes it square, 0.92 makes it taller. */
+.portrait-frame {
+  position: relative;
+  width: min(350px, 100%);
+  aspect-ratio: 1;
+  background: var(--navy);
+}
+
+/* Light offset layer behind the portrait. Change top/right for offset amount. */
+.portrait-frame::before {
+  position: absolute;
+  top: -26px;
+  right: -26px;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: #d7e0e2;
+  border: 1px solid rgba(6, 39, 103, 0.1);
+}
+
+/* Placeholder portrait area.
+   Replace this with an img later if you provide a real photo.
+   inset controls how the image overlaps the navy frame. */
+.portrait-placeholder {
+  position: absolute;
+  inset: -26px -26px 26px 26px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 31%, rgba(255, 255, 255, 0.92) 0 7%, transparent 8%),
+    radial-gradient(circle at 50% 54%, rgba(255, 255, 255, 0.55) 0 18%, transparent 19%),
+    linear-gradient(140deg, #112457, #24616f 52%, #d7c37a);
+}
+
+/* Decorative highlight over the placeholder portrait. */
+.portrait-placeholder::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.12), transparent 28%),
+    radial-gradient(circle at 72% 20%, rgba(255, 255, 255, 0.35), transparent 18%);
+}
+
+/* SKB initials circle inside the placeholder.
+   Change width/height for circle size and font-size for initials size. */
+.portrait-placeholder span {
+  position: relative;
+  display: grid;
+  width: 180px;
+  height: 180px;
+  place-items: center;
+  color: #fff;
+  background: rgba(6, 39, 103, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.74);
+  border-radius: 50%;
+  font-size: 48px;
+  font-weight: 800;
+}
+
+/* Right-side homepage text block. */
+.hero-copy {
+  padding-top: 0px;
+}
+
+/* Small uppercase label above your homepage name. */
+.kicker {
+  margin: 0 0 18px;
+  color: var(--teal);
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+/* Main homepage name.
+   Change font-size for desktop name size.
+   Also check @media rules near the bottom for tablet/mobile name sizes. */
+.hero-copy h1 {
+  max-width: 680px;
+  margin: 0;
+  color: var(--navy);
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 0.96;
+}
+
+/* Homepage role text under the large name. */
+.role {
+  margin: 48px 0 40px;
+  color: var(--navy);
+  font-size: 27px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Homepage affiliation/contact text under the role. */
+address {
+  display: grid;
+  gap: 14px;
+  color: var(--navy);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* Homepage visual experiment
+   These rules affect index.html only because the body has class="home-page".
+   If you like this style, we can later copy the same visual language to CV and Research.
+
+   Quick edits:
+   - Header color: change .home-page .site-header background.
+   - Homepage font: change .home-page font-family.
+   - Big name color/size: change .home-page .hero-copy h1.
+   - Header nav color: change .home-page .site-nav and .home-page .site-nav a:hover.
+*/
+.home-page {
+  color: #272221;
+  background: #fff9e6;
+  font-family: "Avenir Next", "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+.home-page .site-header {
+  min-height: 158px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 44px min(6vw, 74px);
+  background: #fff9e6;
+  border-bottom: 1px solid rgba(39, 34, 33, 0.1);
+  box-shadow: 0 18px 54px rgba(39, 34, 33, 0.08);
+}
+
+.home-page .brand-mark {
+  background: var(--navy);
+}
+
+.home-page .brand-mark::after {
+  background: var(--navy);
+}
+
+.home-page .brand-copy strong,
+.home-page .brand-copy span {
+  color: var(--navy);
+}
+
+.home-page .brand-copy strong {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.home-page .brand-copy span {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+}
+
+.home-page .site-nav {
+  color: #272221;
+}
+
+.home-page .site-nav {
+  width: auto;
+  justify-content: flex-end;
+  gap: 44px;
+  padding-top: 0;
+  color: var(--navy);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.home-page .site-nav a:hover {
+  color: #7a5a42;
+}
+
+.home-page .site-nav a:last-child {
+  min-width: 0;
+  margin-left: 0;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border-radius: 0;
+  text-align: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.home-page .site-nav a:last-child:hover {
+  color: #7a5a42;
+  background: transparent;
+}
+
+.home-page .hero {
+  min-height: 760px;
+  background: #fff9e6;
+}
+
+.home-page .portrait-frame {
+  background: #06183d;
+  box-shadow: 0 30px 80px rgba(6, 24, 61, 0.18);
+}
+
+.home-page .portrait-frame::before {
+  background: #dcecea;
+}
+
+.home-page .portrait-placeholder {
+  background:
+    radial-gradient(circle at 55% 24%, rgba(255, 255, 255, 0.34), transparent 18%),
+    radial-gradient(circle at 50% 52%, rgba(244, 201, 93, 0.18), transparent 26%),
+    linear-gradient(140deg, #06183d, #0b425c 48%, #0b6f68 100%);
+}
+
+.home-page .portrait-placeholder span {
+  background: rgba(6, 24, 61, 0.72);
+  border-color: rgba(255, 255, 255, 0.72);
+}
+
+.home-page .kicker {
+  color: #7a5a42;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.home-page .hero-copy h1 {
+  color: #272221;
+  font-family: "ITC Founder's Caslon", "Founders Caslon", "Libre Caslon Display", Georgia, "Times New Roman", serif;
+  font-size: 84px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.home-page .role {
+  color: var(--navy);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.home-page address {
+  color: var(--navy);
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+}
+
+/* Home Page: Bio Image Section
+   Controls the wide image-backed Bio block on index.html. */
+.bio-section {
+  padding: 0 min(4.5vw, 90px) 86px;
+}
+
+/* Bio background image and dark overlay.
+   Change url(...) to use a different image.
+   Change min-height to make the image band taller/shorter.
+   Change rgba values in linear-gradient for overlay darkness. */
+.bio-background {
+  display: grid;
+  min-height: 720px;
+  place-items: center;
+  background:
+    linear-gradient(rgba(5, 28, 70, 0.28), rgba(5, 28, 70, 0.3)),
+    url("assets/bio-abstract-network.png") center / cover;
+}
+
+/* Centers the Bio text over the image. */
+.bio-overlay {
+  display: grid;
+  justify-items: center;
+  width: min(920px, calc(100% - 36px));
+  color: #fff;
+  text-align: center;
+}
+
+/* Bio section title. */
+.bio-overlay h2 {
+  margin: 0 0 40px;
+  font-family: "ITC Founder's Caslon", "Founders Caslon", "Libre Caslon Display", Georgia, "Times New Roman", serif;
+  font-size: 72px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* Bio paragraph text. */
+.bio-overlay p {
+  max-width: 900px;
+  margin: 0 0 30px;
+  font-size: 17px;
+  line-height: 1.85;
+}
+
+/* Homepage section dividers
+   Fine horizontal line between major homepage sections.
+   Change min-height to add/remove vertical spacing.
+   Change width in ::before to make the line longer/shorter. */
+.section-divider {
+  position: relative;
+  min-height: 96px;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.section-divider::before {
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  width: min(1180px, calc(100% - 72px));
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, transparent, rgba(6, 39, 103, 0.46) 12%, rgba(6, 39, 103, 0.58) 50%, rgba(6, 39, 103, 0.46) 88%, transparent);
+  transform: translateX(-50%);
+}
+
+.section-divider::after {
+  display: none;
+}
+
+.section-divider-compact {
+  min-height: 86px;
+}
+
+.section-divider span {
+  display: none;
+}
+
+/* Shared Buttons
+   Used by Learn More, Read More, View All, Download CV, and Submit.
+   Change min-height/padding for button size and font-size for button text. */
+.outline-button,
+.solid-button,
+.contact-form button {
+  display: inline-flex;
+  min-width: 124px;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px;
+  border: 1px solid var(--navy);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Outline button on light backgrounds. */
+.outline-button {
+  color: var(--navy);
+  background: transparent;
+}
+
+/* Outline button on dark/image backgrounds. */
+.outline-button.light {
+  margin-top: 34px;
+  color: #fff;
+  border-color: #fff;
+}
+
+/* Filled navy buttons. */
+.solid-button,
+.contact-form button {
+  color: #fff;
+  background: var(--navy);
+}
+
+/* Shared button hover state. */
+.outline-button:hover,
+.solid-button:hover,
+.contact-form button:hover {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #fff;
+}
+
+/* Home Page: Latest Publication Section
+   This is the cream "Latest Publication" block on index.html. */
+.publication-section {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  margin: 0 min(4.5vw, 90px) 86px;
+  padding: 86px 32px;
+  color: var(--navy);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 44%),
+    var(--cream);
+  text-align: center;
+}
+
+/* Invisible anchor used to make the Blog nav link land near this section. */
+.anchor-target {
+  position: absolute;
+  top: 0;
+}
+
+/* Small arch icon above "Latest Publication". */
+.section-mark {
+  width: 42px;
+  height: 22px;
+  margin-bottom: 66px;
+  border: 11px solid var(--navy);
+  border-bottom: 0;
+  border-radius: 42px 42px 0 0;
+}
+
+/* Latest Publication title. */
+.publication-section h2 {
+  margin: 0 0 58px;
+  font-family: "ITC Founder's Caslon", "Founders Caslon", "Libre Caslon Display", Georgia, "Times New Roman", serif;
+  font-size: 46px;
+  font-weight: 500;
+}
+
+/* Latest Publication subtitle/paper title. */
+.publication-section h3 {
+  margin: 0 0 40px;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+/* Latest Publication paragraph. */
+.publication-section p {
+  max-width: 900px;
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.8;
+}
+
+/* Button row inside Latest Publication. */
+.button-row {
+  display: flex;
+  gap: 20px;
+  margin-top: 58px;
+}
+
+/* Shared Contact Section
+   Used on index.html, cv.html, and research.html. */
+.contact-section {
+  padding: 0 min(4.5vw, 90px) 88px;
+}
+
+/* Contact card layout.
+   Change grid-template-columns to adjust left/right column widths.
+   Change gap for space between contact info and form.
+   Change padding to resize inner spacing. */
+.contact-card {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.88fr) minmax(420px, 1fr);
+  gap: 92px;
+  min-height: 620px;
+  padding: 76px min(11vw, 220px);
+  color: var(--navy);
+  background: var(--cream);
+}
+
+/* Contact name heading. */
+.contact-info h2 {
+  margin: 0 0 44px;
+  font-family: "ITC Founder's Caslon", "Founders Caslon", "Libre Caslon Display", Georgia, "Times New Roman", serif;
+  font-size: 46px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* Contact address/email/phone text. */
+.contact-info p {
+  margin: 0 0 18px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+/* Adds extra space before email/phone group. */
+.contact-info p:nth-of-type(3) {
+  margin-top: 36px;
+}
+
+/* Social icon row. */
+.social-links {
+  display: flex;
+  gap: 18px;
+  margin-top: 34px;
+}
+
+/* Individual social icon circles. */
+.social-links a {
+  display: grid;
+  min-width: 28px;
+  height: 28px;
+  place-items: center;
+  color: #fff;
+  background: var(--navy);
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* Contact form two-column layout on desktop. */
+.contact-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 22px;
+  align-content: start;
+}
+
+/* Form labels. */
+.contact-form label {
+  display: grid;
+  gap: 12px;
+  color: var(--navy);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Form inputs and textarea.
+   Change border-bottom for underline thickness/color.
+   Change min-height for input height. */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 0;
+  color: var(--navy);
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid var(--line);
+  border-radius: 0;
+  font: inherit;
+  outline: 0;
+}
+
+/* Message box height. */
+.contact-form textarea {
+  min-height: 128px;
+  resize: vertical;
+}
+
+/* Input underline color when typing. */
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-bottom-color: var(--navy);
+}
+
+/* Makes message field and submit button span the full form width. */
+.message-field,
+.contact-form button {
+  grid-column: 1 / -1;
+}
+
+/* Submit button sizing. */
+.contact-form button {
+  width: 100%;
+  min-height: 56px;
+  margin-top: -8px;
+  border-color: var(--navy);
+  font-size: 20px;
+  font-weight: 500;
+}
+
+/* CV Page
+   Styles below control cv.html. */
+.cv-page {
+  background: var(--paper);
+}
+
+/* CV About Me image-backed band. */
+.cv-about {
+  display: grid;
+  min-height: 720px;
+  place-items: center;
+  padding: 96px 24px 88px;
+  color: #ffffff;
+  background:
+    linear-gradient(rgba(5, 28, 70, 0.34), rgba(5, 28, 70, 0.46)),
+    url("assets/cv-about-abstract.png") center / cover;
+  text-align: center;
+}
+
+/* Width and alignment of CV about text. */
+.cv-copy {
+  display: grid;
+  justify-items: center;
+  width: min(1040px, calc(100% - 36px));
+}
+
+.cv-copy h1 {
+  margin: 0 0 62px;
+  color: #ffffff;
+  font-family: "ITC Founder's Caslon", "Founders Caslon", "Libre Caslon Display", Georgia, "Times New Roman", serif;
+  font-size: 78px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* CV about paragraphs. */
+.cv-copy p {
+  max-width: 1000px;
+  margin: 0 0 32px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.8;
+}
+
+/* Download CV button spacing. */
+.cv-copy .outline-button {
+  margin-top: 28px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #ffffff;
+}
+
+.cv-copy .outline-button:hover {
+  color: var(--navy);
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
+/* CV Education heading white band. */
+.cv-heading {
+  display: grid;
+  min-height: 458px;
+  place-items: center;
+  padding: 82px 24px 70px;
+  background: var(--paper);
+  text-align: center;
+}
+
+/* Education heading text. */
+.cv-heading h2 {
+  margin: 52px 0 0;
+  color: #272221;
+  font-family: "ITC Founder's Caslon", "Founders Caslon", "Libre Caslon Display", Georgia, "Times New Roman", serif;
+  font-size: 45px;
+  font-weight: 500;
+}
+
+/* Decorative icon above Education. */
+.cv-symbol {
+  position: relative;
+  width: 54px;
+  height: 42px;
+}
+
+/* Icon shapes for Education. */
+.cv-symbol::before,
+.cv-symbol::after {
+  position: absolute;
+  bottom: 0;
+  content: "";
+  background: var(--navy);
+  border-radius: 50% 50% 0 0;
+}
+
+.cv-symbol::before {
+  left: 0;
+  width: 29px;
+  height: 29px;
+}
+
+.cv-symbol::after {
+  right: 0;
+  width: 29px;
+  height: 29px;
+}
+
+/* Center dot of Education icon. */
+.cv-symbol {
+  background:
+    radial-gradient(circle at 50% 13px, var(--navy) 0 14px, transparent 15px);
+}
+
+/* Education timeline/list area.
+   Change grid-template-columns if you want 2 columns or 4 columns.
+   Change padding for vertical spacing. */
+.education-section {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 48px;
+  min-height: 420px;
+  align-items: start;
+  padding: 128px min(12vw, 250px) 112px;
+  color: var(--navy);
+  background: var(--cream);
+  text-align: center;
+}
+
+/* Education years. */
+.education-item h3 {
+  margin: 0 0 52px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* Education degree/school/location text. */
+.education-item p {
+  margin: 0 0 14px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+/* Extra spacing above contact section on CV page. */
+.cv-contact {
+  padding-top: 88px;
+}
+
+/* Footer used on secondary pages. */
+.site-footer {
+  display: flex;
+  min-height: 96px;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  color: var(--navy);
+  background: var(--paper);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Research Page
+   Styles below control research.html. */
+.research-page {
+  background: var(--paper);
+}
+
+/* Research title white band. */
+.research-title {
+  display: grid;
+  min-height: 370px;
+  place-items: center;
+  padding: 64px 24px;
+  background: var(--paper);
+}
+
+/* Research page title. */
+.research-title h1 {
+  margin: 0;
+  color: #272221;
+  font-family: "ITC Founder's Caslon", "Founders Caslon", "Libre Caslon Display", Georgia, "Times New Roman", serif;
+  font-size: 78px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* Research intro cream text band. */
+.research-intro {
+  display: grid;
+  min-height: 438px;
+  place-items: center;
+  padding: 92px 24px 82px;
+  color: var(--navy);
+  background: var(--cream);
+  text-align: center;
+}
+
+/* Width and alignment of research intro text. */
+.research-copy {
+  display: grid;
+  justify-items: center;
+  width: min(1040px, 100%);
+}
+
+/* Research intro paragraphs. */
+.research-copy p {
+  max-width: 1000px;
+  margin: 0 0 32px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.8;
+}
+
+/* Published Papers heading white band. */
+.papers-heading {
+  display: grid;
+  min-height: 340px;
+  place-items: center;
+  padding: 82px 24px 48px;
+  background: var(--paper);
+  text-align: center;
+}
+
+/* Published Papers title. */
+.papers-heading h2 {
+  margin: 58px 0 0;
+  color: #272221;
+  font-family: "ITC Founder's Caslon", "Founders Caslon", "Libre Caslon Display", Georgia, "Times New Roman", serif;
+  font-size: 45px;
+  font-weight: 500;
+}
+
+/* Decorative icon above Published Papers. */
+.paper-symbol {
+  position: relative;
+  width: 46px;
+  height: 34px;
+  background: var(--navy);
+  border-radius: 50% 50% 0 0;
+}
+
+/* Decorative icon lower shapes. */
+.paper-symbol::before,
+.paper-symbol::after {
+  position: absolute;
+  bottom: -9px;
+  content: "";
+  background: var(--navy);
+}
+
+.paper-symbol::before {
+  left: 5px;
+  width: 36px;
+  height: 10px;
+}
+
+.paper-symbol::after {
+  left: 9px;
+  width: 28px;
+  height: 19px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 72%);
+}
+
+/* Publication list area.
+   Change padding to move the list closer/farther from the heading. */
+.publication-list-section {
+  padding: 36px min(12vw, 250px) 110px;
+  background: var(--paper);
+}
+
+/* Ordered publication list.
+   Change max-width to make the citation column wider/narrower. */
+.publication-list {
+  display: grid;
+  gap: 28px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0;
+  color: var(--navy);
+  counter-reset: publications;
+  list-style: none;
+}
+
+/* Individual publication item.
+   Change font-size for citation text size.
+   Change background for card color.
+   Change border-left for the vertical navy stripe. */
+.publication-list li {
+  position: relative;
+  padding: 28px 32px 28px 76px;
+  background: var(--cream);
+  border-left: 6px solid var(--navy);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.75;
+}
+
+/* Automatic publication number. */
+.publication-list li::before {
+  position: absolute;
+  top: 30px;
+  left: 28px;
+  color: var(--teal);
+  content: counter(publications) ".";
+  counter-increment: publications;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* Italic journal name styling. */
+.publication-list em {
+  font-style: italic;
+}
+
+/* Extra spacing above contact section on Research page. */
+.research-contact {
+  padding-top: 42px;
+}
+
+/* Tablet layout changes.
+   These override desktop styles when the browser width is 1100px or smaller. */
+@media (max-width: 1100px) {
+  /* Homepage hero becomes slightly narrower. */
+  .hero {
+    grid-template-columns: minmax(300px, 430px) minmax(320px, 480px);
+    gap: 54px;
+  }
+
+  /* Tablet homepage name size. */
+  .hero-copy h1 {
+    font-size: 60px;
+  }
+
+  /* Contact card gets smaller side padding. */
+  .contact-card {
+    padding: 68px 72px;
+  }
+}
+
+/* Small tablet / large phone layout changes.
+   These override desktop styles when the browser width is 860px or smaller. */
+@media (max-width: 860px) {
+  /* Header stacks logo and nav vertically. */
+  .site-header {
+    min-height: auto;
+    flex-direction: column;
+    padding: 34px 24px;
+  }
+
+  /* Nav wraps to multiple lines if needed. */
+  .site-nav {
+    flex-wrap: wrap;
+    gap: 18px 26px;
+    padding-top: 0;
+  }
+
+  /* Homepage hero becomes one column: portrait above text. */
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 42px;
+    min-height: auto;
+    padding: 72px 24px;
+  }
+
+  /* Centers portrait on smaller screens. */
+  .portrait-panel {
+    justify-content: center;
+  }
+
+  /* Smaller portrait frame on tablet/mobile. */
+  .portrait-frame {
+    width: min(460px, calc(100% - 26px));
+  }
+
+  /* Centers homepage text block. */
+  .hero-copy {
+    max-width: 620px;
+    padding-top: 0;
+    margin: 0 auto;
+  }
+
+  /* Tablet homepage name size. */
+  .hero-copy h1 {
+    font-size: 52px;
+  }
+
+  /* Smaller side padding for image/contact sections. */
+  .bio-section,
+  .contact-section {
+    padding-inline: 22px;
+  }
+
+  /* Shorter Bio image band. */
+  .bio-background {
+    min-height: 620px;
+  }
+
+  /* Tablet Bio title size. */
+  .bio-overlay h2 {
+    font-size: 54px;
+  }
+
+  /* Reduces side margin on Latest Publication. */
+  .publication-section {
+    margin-inline: 22px;
+  }
+
+  /* Contact form becomes one column on smaller screens. */
+  .contact-card {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 54px 34px;
+  }
+
+  /* Shorter title bands on Research page. */
+  .research-title {
+    min-height: 280px;
+  }
+
+  /* Tablet CV/Research title size. */
+  .cv-copy h1,
+  .research-title h1 {
+    font-size: 56px;
+  }
+
+  /* Smaller CV/Research intro padding. */
+  .cv-about,
+  .research-intro {
+    min-height: auto;
+    padding: 68px 24px;
+  }
+
+  /* Shorter CV/Research section-heading bands. */
+  .cv-heading,
+  .papers-heading {
+    min-height: 320px;
+  }
+
+  /* Education items stack vertically. */
+  .education-section {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    gap: 72px;
+    padding: 82px 24px;
+  }
+
+  /* Less space below education year on mobile/tablet. */
+  .education-item h3 {
+    margin-bottom: 28px;
+  }
+
+  /* Publication list gets smaller side padding. */
+  .publication-list-section {
+    padding-inline: 22px;
+  }
+
+  /* Homepage-only version of the mobile header rules.
+     Needed because the homepage has stronger scoped header styles above. */
+  .home-page .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 30px 24px;
+  }
+
+  .home-page .site-nav {
+    justify-content: flex-start;
+    gap: 18px 28px;
+    font-size: 20px;
+  }
+
+  .home-page .site-nav a:last-child {
+    min-width: 0;
+    margin-left: 0;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  .home-page .hero {
+    background: #fff9e6;
+  }
+}
+
+/* Phone layout changes.
+   These override desktop/tablet styles when the browser width is 560px or smaller. */
+@media (max-width: 560px) {
+  /* Header name size on phones. */
+  .brand-copy strong {
+    font-size: 20px;
+  }
+
+  /* Homepage name size on phones. */
+  .hero-copy h1 {
+    font-size: 42px;
+  }
+
+  /* Homepage role spacing and size on phones. */
+  .role {
+    margin: 30px 0;
+    font-size: 22px;
+  }
+
+  /* SKB initials circle becomes smaller on phones. */
+  .portrait-placeholder span {
+    width: 130px;
+    height: 130px;
+    font-size: 36px;
+  }
+
+  /* Shared section heading size on phones. */
+  .bio-overlay h2,
+  .publication-section h2,
+  .contact-info h2,
+  .cv-copy h1,
+  .cv-heading h2,
+  .research-title h1,
+  .papers-heading h2 {
+    font-size: 38px;
+  }
+
+  /* Shared paragraph size on phones. */
+  .bio-overlay p,
+  .publication-section p,
+  .cv-copy p,
+  .research-copy p {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* Publication citation card is more compact on phones. */
+  .publication-list li {
+    padding: 24px 22px 24px 58px;
+    font-size: 15px;
+  }
+
+  /* Publication number position/size on phones. */
+  .publication-list li::before {
+    left: 22px;
+    font-size: 15px;
+  }
+
+  /* Buttons/form become single-column on phones. */
+  .button-row,
+  .contact-form {
+    grid-template-columns: 1fr;
+  }
+
+  /* Latest Publication buttons get a fixed compact width. */
+  .button-row {
+    display: grid;
+    width: min(260px, 100%);
+  }
+
+  /* Homepage-only phone typography. */
+  .home-page .brand-copy strong {
+    font-size: 20px;
+  }
+
+  .home-page .hero-copy h1 {
+    font-size: 42px;
+  }
+
+  .home-page .site-nav {
+    font-size: 18px;
+  }
+
+  .home-page .site-nav a:last-child {
+    min-width: 0;
+    padding: 0;
+    font-size: inherit;
+  }
+}
