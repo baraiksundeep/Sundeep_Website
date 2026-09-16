@@ -9,17 +9,20 @@
   <body class="home-page">
     <header class="site-header">
       <a class="brand" href="index.html#home" aria-label="Sundeep Kumar Baraik home">
-        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-avatar" aria-hidden="true">
+          <img src="assets/sundeep-portrait-enhanced.png" alt="" />
+        </span>
         <span class="brand-copy">
           <strong>Sundeep Kumar Baraik</strong>
-          <span>PhD Student</span>
         </span>
       </a>
 
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="index.html#home">Home</a>
-        <a href="cv.html">CV</a>
+        <a href="about.html">About</a>
         <a href="research.html">Research</a>
+        <a href="publication.html">Publication</a>
+        <a href="life.html">Life</a>
         <a href="index.html#contact">Contact</a>
       </nav>
     </header>
@@ -28,117 +31,132 @@
       <section class="hero" id="home" aria-label="Profile introduction">
         <div class="portrait-panel">
           <div class="portrait-frame">
-            <div class="portrait-placeholder" role="img" aria-label="Portrait placeholder">
-              <span>SKB</span>
-            </div>
+            <img class="portrait-photo" src="assets/sundeep-portrait-enhanced.png" alt="Sundeep Kumar Baraik" fetchpriority="high" decoding="async" />
           </div>
         </div>
 
         <div class="hero-copy">
           <h1>Sundeep Kumar Baraik</h1>
-          <p class="role">PhD Student</p>
+          <p class="role">PhD student at Indian Institute of Technology Delhi</p>
 
           <address>
-            <span>Your University, Department Name</span>
-            <span>Your research group or lab</span>
-            <span>Email: your.email@example.com</span>
+            <span>Email: <a href="mailto:sundeep.baraik@gmail.com">sundeep.baraik@gmail.com</a></span>
           </address>
-        </div>
-      </section>
-
-      <section class="bio-section" id="cv" aria-label="Bio">
-        <div class="bio-background">
-          <div class="bio-overlay">
-            <h2>Bio</h2>
-            <p>
-              I am a graduate student at the Tel Aviv University Astrophysics
-              Department. I am mostly working on active galactic nuclei and
-              their role in galaxy evolution, and on machine learning algorithms
-              and their application to astronomical datasets.
-            </p>
-            <p>
-              This space will become your concise academic story: your research
-              interests, methods, collaborations, and the kind of problems you
-              want your work to solve.
-            </p>
-            <a class="outline-button light" href="#contact">Learn More</a>
+          <div class="hero-actions" aria-label="Explore my academic work">
+            <a href="research.html">Research</a>
+            <a href="research.html#publications">Publications</a>
+            <a href="about.html">About</a>
           </div>
         </div>
       </section>
 
-      <div class="section-divider" aria-hidden="true">
-        <span></span>
-      </div>
-
-      <section class="publication-section" id="research" aria-label="Latest publication">
-        <span class="anchor-target" id="blog"></span>
-        <span class="section-mark" aria-hidden="true"></span>
-        <h2>Latest Publication</h2>
-        <h3>Working Title: Research Topic or Manuscript Name</h3>
-        <p>
-          Use this section to highlight your most important paper, preprint,
-          poster, or current research project. Keep it short, clear, and linked
-          to the full publication once available.
-        </p>
-        <div class="button-row">
-          <a class="outline-button" href="#">Read More</a>
-          <a class="solid-button" href="#">View All</a>
+      <section class="about-section" id="cv" aria-labelledby="about-title">
+        <div class="about-inner">
+          <h2 id="about-title">About Me</h2>
+          <p class="about-intro">
+            I am Sundeep Kumar Baraik, a PhD student at the Indian Institute of
+            Technology Delhi. My research focuses on climate modelling within
+            the field of atmospheric science.
+          </p>
+          <div class="about-details">
+            <p>
+              My academic work brings together atmospheric science and climate
+              modelling. Explore my research and publications to learn more
+              about my work.
+            </p>
+            <a class="outline-button" href="research.html">Learn More</a>
+          </div>
         </div>
       </section>
 
-      <div class="section-divider section-divider-compact" aria-hidden="true">
-        <span></span>
-      </div>
+      <section class="latest-publication" id="research" aria-labelledby="latest-title">
+        <svg class="publication-dip" viewBox="0 0 180 32" aria-hidden="true" focusable="false">
+          <path d="M0 0H180C140 0 116 7 90 32C64 7 40 0 0 0Z" fill="#ffffff" />
+        </svg>
+        <div class="latest-inner">
+          <h2 id="latest-title">Latest Publication</h2>
+          <p class="latest-label">Published Research</p>
+          <div class="latest-content">
+            <p class="latest-year">2026 <span>Bulletin of the American Meteorological Society<br />107 (3), E564–E584</span></p>
+            <article>
+              <h3>Advancing Climate Services in South Asia: The SARCI Framework for Actionable Climate Information and Regional Capacity Building</h3>
+              <p class="publication-authors">Bhuyan, D. P., Upadhyaya, P., Pathak, R., Namdev, P., Salunke, P., Anand, A., Suresh, A. D., Arora, A., <span class="author-highlight">Baraik, S. K.</span>, Jain, S., Parihar, R. S., Dwivedi, A., Sahany, S., Sharan, M., Dash, S. K., Fasullo, J. T., Behera, S. K., Tribbia, J., &amp; Mishra, S. K.</p>
+              <div class="latest-actions">
+                <a href="https://doi.org/10.1175/BAMS-D-25-0172.1" target="_blank" rel="noopener noreferrer">Read Publication <span aria-hidden="true">↗</span></a>
+                <a href="https://scholar.google.com/citations?user=TT_LjRwAAAAJ&amp;hl=en&amp;sortby=pubdate" target="_blank" rel="noopener noreferrer">Google Scholar <span aria-hidden="true">↗</span></a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
 
-      <section class="contact-section" id="contact" aria-label="Contact">
-        <div class="contact-card">
-          <div class="contact-info">
-            <h2>Sundeep Kumar Baraik</h2>
-            <p>Your University, Department Name</p>
-            <p>Your office or city, country</p>
-            <p>your.email@example.com</p>
-            <p>+91 00000 00000</p>
-            <div class="social-links" aria-label="Social links">
-              <a href="#" aria-label="Google Scholar">G</a>
-              <a href="#" aria-label="GitHub">GH</a>
-              <a href="#" aria-label="LinkedIn">in</a>
-              <a href="#" aria-label="ORCID">ID</a>
+      <section class="home-contact" id="contact" aria-labelledby="contact-title">
+        <svg class="contact-dip" viewBox="0 0 180 32" aria-hidden="true" focusable="false">
+          <path d="M0 0H180C140 0 116 7 90 32C64 7 40 0 0 0Z" fill="#2d3634" />
+        </svg>
+        <div class="contact-inner">
+          <h2 id="contact-title">Contact</h2>
+          <p class="contact-welcome">I welcome conversations about research and collaboration. Please feel free to get in touch.</p>
+          <div class="contact-layout">
+          <div class="connect-panel">
+          <h3>Let’s Connect</h3>
+          <p class="panel-intro">Find me here, or write to me about your research and collaboration ideas.</p>
+          <dl class="contact-links-grid">
+            <div>
+              <dt>Email</dt>
+              <dd><a href="mailto:sundeep.baraik@gmail.com">sundeep.baraik@gmail.com</a></dd>
             </div>
+            <div>
+              <dt>Location</dt>
+              <dd>Indian Institute of Technology Delhi<br />New Delhi, India</dd>
+            </div>
+            <div>
+              <dt>Google Scholar</dt>
+              <dd><a href="https://scholar.google.com/citations?user=TT_LjRwAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">View publications <span aria-hidden="true">↗</span></a></dd>
+            </div>
+            <div>
+              <dt>LinkedIn</dt>
+              <dd><a href="https://www.linkedin.com/in/sundeep-kumar-baraik-2a3049211/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn <span aria-hidden="true">↗</span></a></dd>
+            </div>
+          </dl>
           </div>
-
-          <form class="contact-form" aria-label="Contact form">
-            <label>
-              First name *
-              <input type="text" name="first-name" />
-            </label>
-            <label>
-              Last name *
-              <input type="text" name="last-name" />
-            </label>
-            <label>
-              Email *
-              <input type="email" name="email" />
-            </label>
-            <label>
-              Phone
-              <input type="tel" name="phone" />
-            </label>
-            <label>
-              Address
-              <input type="text" name="address" />
-            </label>
-            <label>
-              Subject
-              <input type="text" name="subject" />
-            </label>
-            <label class="message-field">
-              Type your message here
-              <textarea name="message"></textarea>
-            </label>
-            <button type="submit">Submit</button>
-          </form>
+          <div class="message-panel">
+            <h3>Send a Message</h3>
+            <p class="panel-intro">I look forward to hearing about your work.</p>
+            <form class="message-compose" id="message-compose">
+              <div class="message-fields">
+                <label for="sender-name">Name <span aria-hidden="true">*</span>
+                  <input id="sender-name" name="name" autocomplete="name" placeholder="Your full name" required maxlength="120" />
+                </label>
+                <label for="sender-email">Email <span aria-hidden="true">*</span>
+                  <input id="sender-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required maxlength="254" />
+                </label>
+              </div>
+              <label for="message-topic">Subject
+                <select id="message-topic" name="topic">
+                  <option value="Research enquiry">Research enquiry</option>
+                  <option value="Collaboration">Collaboration</option>
+                  <option value="Other enquiry">Other enquiry</option>
+                </select>
+              </label>
+              <label for="sender-message">Message <span aria-hidden="true">*</span>
+                <textarea id="sender-message" name="message" rows="6" placeholder="Tell me about your research or collaboration idea…" required maxlength="5000"></textarea>
+              </label>
+              <button type="submit">Open Email Draft <span aria-hidden="true">↗</span></button>
+              <p class="compose-note">Opens your email app with a draft to review and send. You can also email me directly using the link alongside.</p>
+              <p class="compose-status" id="compose-status" role="status"></p>
+            </form>
+          </div>
+          </div>
         </div>
       </section>
+
     </main>
+    <footer class="home-footer">
+      <span>&copy; 2026 Sundeep Kumar Baraik</span>
+      <span>Hosted on GitHub</span>
+    </footer>
+    <script src="contact.js" defer></script>
   </body>
 </html>
+

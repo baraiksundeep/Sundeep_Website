@@ -1,0 +1,3 @@
+Created using the built-in image_gen tool from IMG-20250713-WA0147.jpg.
+
+Use case: identity-preserve. Edit the supplied portrait photograph for natural HD clarity. Preserve this exact person's identity, facial geometry, expression, skin tone, glasses, hair, beard, clothing, crossed arms, watch, pose, framing and original city/sky background. Improve fine detail, reduce compression/softness and gently balance exposure and color. Retain real skin texture and realistic lens reflections; no beauty filter, no face reshaping, no invented accessories, no background replacement, no text. Produce a high-resolution portrait, ideally 3000x4000, preserving original 3:4 composition. This is faithful photographic enhancement, not a redesigned portrait.
