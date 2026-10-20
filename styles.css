@@ -13,6 +13,13 @@
 
 /* Global design tokens: change these to update the whole site color palette. */
 :root {
+  --section-background:
+    radial-gradient(ellipse at 52% 38%, #25434c 0%, transparent 72%),
+    linear-gradient(125deg, #0c2028 0%, #12333e 48%, #101c30 100%);
+  /* Shared navbar palette across every page. */
+  --header-background: linear-gradient(105deg, #0c2028 0%, #1a3b45 52%, #0c2028 100%);
+  --header-text: #ffca55;
+  --header-hover: #fff9e6;
   /* Main brand color used for headings, nav, icons, buttons, and borders. */
   --navy: #062767;
   /* Darker navy, available when stronger contrast is needed. */
@@ -63,6 +70,9 @@ a {
    Change min-height for header height, padding for header inner spacing,
    and background for the cream header color. */
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   display: flex;
   min-height: 158px;
   align-items: center;
@@ -313,6 +323,8 @@ address {
    - Header nav color: change :is(.home-page, .research-view) .site-nav and :is(.home-page, .research-view) .site-nav a:hover.
 */
 .home-page {
+  --hero-ivory: #ffca55;
+  --hero-sage: #fff9e6;
   color: #272221;
   background: #fff9e6;
   font-family: "Avenir Next", "Segoe UI", Arial, Helvetica, sans-serif;
@@ -349,8 +361,8 @@ address {
   width: 250%;
   max-width: none;
   height: auto;
-  left: -75%;
-  top: -90%;
+  left: -66%;
+  top: -30%;
 }
 
 :is(.home-page, .research-view) .brand-mark::after {
@@ -408,24 +420,73 @@ address {
 }
 
 .home-page .hero {
+  position: relative;
+  isolation: isolate;
   min-height: auto;
   padding-top: 158.05px;
   padding-bottom: 158.05px;
-  /* Olive-to-sage gradient coordinated with the navigation bar. */
+  /* Earlier approved teal preview: quiet center with atmospheric edge curves. */
   background:
-    radial-gradient(ellipse at 58% 42%, rgba(111, 132, 123, 0.38), transparent 72%),
-    linear-gradient(105deg, #22271c 0%, #414e43 34%, #4e5c51 62%, #303929 100%);
+    radial-gradient(ellipse at 52% 38%, #25434c 0%, transparent 72%),
+    linear-gradient(125deg, #0c2028 0%, #12333e 48%, #101c30 100%);
+}
+
+.home-page .hero::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  pointer-events: none;
+  background: url("assets/atmospheric-curves.svg") center / 100% 100% no-repeat;
+}
+
+.home-page .site-header {
+  background: linear-gradient(105deg, #0c2028 0%, #1a3b45 52%, #0c2028 100%);
+  border-bottom-color: rgba(182, 206, 200, 0.18);
+  box-shadow: 0 18px 54px rgba(4, 15, 24, 0.16);
+}
+
+.home-page .brand-copy strong,
+.home-page .site-nav {
+  color: var(--hero-ivory);
+}
+
+.home-page .site-nav a:hover,
+.home-page .site-nav a:last-child:hover {
+  color: var(--hero-sage);
 }
 
 .home-page .portrait-frame {
   /* Compensate for the photo's -26px top offset to center it with the text. */
   transform: translateY(26px);
-  background: #1c3042;
+  background: #123340;
   box-shadow: 0 30px 80px rgba(13, 29, 43, 0.28);
 }
 
 .home-page .portrait-frame::before {
+  background: #163c48;
+  border-color: rgba(182, 206, 200, 0.28);
+}
+
+/* The extended portrait fills the existing box with its wider background. */
+.home-page .portrait-crop {
+  position: absolute;
+  top: -26px;
+  left: 26px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   background: #c6d9e8;
+}
+
+.home-page .portrait-crop .portrait-photo {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
 }
 
 .home-page .portrait-placeholder {
@@ -447,7 +508,7 @@ address {
 }
 
 .home-page .hero-copy h1 {
-  color: #ffca55;
+  color: var(--hero-ivory);
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.24);
   font-family: "ITC Founder's Caslon", "Founders Caslon", "Libre Caslon Display", Georgia, "Times New Roman", serif;
   font-size: clamp(51.2px, 5.04vw, 96px);
@@ -478,28 +539,22 @@ address {
   justify-content: center;
   min-height: 64px;
   padding: 16px 26px;
-  border: 1px solid #9ee8ff;
+  border: 1px solid var(--hero-sage);
   border-radius: 7px;
-  color: #9ee8ff;
+  background: transparent;
+  color: var(--hero-ivory);
   font-size: 18px;
   font-weight: 600;
-}
-
-.hero-actions a:first-child {
-  background: #9ee8ff;
-  color: #203547;
-}
-
-.hero-actions a:last-child {
-  background: #ffc078;
-  border-color: #ffc078;
-  color: #263326;
+  transition: box-shadow 160ms ease;
 }
 
 .hero-actions a:hover {
-  background: #ffffff;
-  border-color: #ffffff;
-  color: #203547;
+  box-shadow: 0 6px 18px rgba(13, 29, 43, 0.2);
+}
+
+.hero-actions a:focus-visible {
+  outline: 2px solid var(--hero-sage);
+  outline-offset: 4px;
 }
 
 .home-page address {
@@ -537,6 +592,7 @@ address {
   margin-inline: auto;
 }
 
+.about-section h1,
 .about-section h2 {
   margin: 0 0 clamp(36px, 3.5vw, 64px);
   font-family: "Libre Caslon Display", Georgia, serif;
@@ -555,7 +611,7 @@ address {
 .about-page .site-header { min-height: 88.48px; padding: 24.64px min(6vw, 74px); background: linear-gradient(105deg, #22271c 0%, #414e43 34%, #4e5c51 62%, #303929 100%); border-bottom: 1px solid rgba(218, 231, 219, 0.18); box-shadow: 0 18px 54px rgba(24, 31, 22, 0.16); }
 .about-page .brand-copy strong { color: #ffca55; font-family: "ITC Founder's Caslon", "Founders Caslon", "Libre Caslon Display", Georgia, serif; font-weight: 480; }
 .about-page .brand-avatar { position: relative; display: block; width: 44px; height: 44px; flex: 0 0 44px; overflow: hidden; border: 1px solid rgba(241, 246, 251, 0.65); border-radius: 50%; background: #c6d9e8; }
-.about-page .brand-avatar img { position: absolute; top: -90%; left: -75%; width: 250%; max-width: none; height: auto; }
+.about-page .brand-avatar img { position: absolute; top: -30%; left: -66%; width: 250%; max-width: none; height: auto; }
 .about-page .site-nav { gap: clamp(16px, 2.3vw, 36px); color: #f1f6fb; font-size: 18px; }
 .about-page .site-nav a:hover { color: #b8dafa; }
 @media (max-width: 860px) { .about-page .site-header { align-items: flex-start; flex-direction: column; padding: 16.8px 24px; } .about-page .site-nav { justify-content: flex-start; gap: 18px 28px; } }
@@ -575,19 +631,23 @@ address {
 
 .about-details {
   display: grid;
-  grid-template-columns: 1fr minmax(0, 0.8fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: 34px;
   padding-top: 48px;
   border-top: 1px solid #d8e1e3;
 }
 
 .about-details p {
-  grid-column: 2;
-  max-width: 560px;
+  grid-column: 1;
+  justify-self: end;
+  width: 100%;
+  max-width: 960px;
+  text-align: left;
+  line-height: 1.55;
 }
 
 .about-details .outline-button {
-  grid-column: 2;
+  grid-column: 1;
   justify-self: end;
   min-width: 180px;
   min-height: 56px;
@@ -616,6 +676,110 @@ address {
   .about-details .outline-button {
     justify-self: start;
   }
+}
+
+.life-quote {
+  max-width: 960px;
+  margin: 0;
+  padding-top: 44px;
+  border-top: 1px solid rgba(227, 236, 238, 0.65);
+  color: #ffca55;
+  font-family: "Libre Caslon Display", Georgia, serif;
+  font-size: clamp(30px, 2.6vw, 40px);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.life-interest-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 34px;
+  padding-top: 44px;
+  border-top: 1px solid #d8e1e3;
+}
+
+.life-interest-grid h3 {
+  margin: 0 0 20px;
+  font-family: "Libre Caslon Display", Georgia, serif;
+  font-size: clamp(30px, 2.6vw, 40px);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.life-interests .life-interest-grid {
+  border-color: rgba(227, 236, 238, 0.65);
+}
+
+.life-interests .life-interest-grid h3 {
+  color: #ffca55;
+}
+
+.life-interests .life-interest-grid p {
+  margin: 0;
+  color: #c4d2cd;
+  font-size: clamp(17px, 1.2vw, 20px);
+  line-height: 1.55;
+}
+
+@media (max-width: 700px) {
+  .life-interest-grid {
+    grid-template-columns: 1fr;
+    padding-top: 32px;
+  }
+}
+
+.life-gallery {
+  margin-top: 88px;
+  padding-top: 44px;
+  border-top: 1px solid rgba(227, 236, 238, 0.35);
+}
+
+.life-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.life-gallery-grid figure {
+  min-width: 0;
+  margin: 0;
+}
+
+.life-gallery-grid img,
+.gallery-placeholder {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 5px;
+}
+
+.life-gallery-grid img {
+  object-fit: cover;
+}
+
+.gallery-placeholder {
+  display: grid;
+  place-items: center;
+  border: 1px dashed rgba(227, 236, 238, 0.35);
+  background: rgba(227, 236, 238, 0.04);
+  color: #c4d2cd;
+  font-size: clamp(17px, 1.2vw, 20px);
+}
+
+.life-gallery-grid figcaption {
+  margin-top: 14px;
+  color: #c4d2cd;
+  font-size: clamp(17px, 1.2vw, 20px);
+  line-height: 1.55;
+}
+
+@media (max-width: 900px) {
+  .life-gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+  .life-gallery { margin-top: 64px; padding-top: 32px; }
+  .life-gallery-grid { grid-template-columns: 1fr; gap: 24px; }
 }
 
 .home-footer {
@@ -720,13 +884,17 @@ address {
   padding: clamp(20px, 2.2vw, 32px);
   border: 1px solid #46524e;
   border-radius: 20px;
-  background: #2d3634;
+  background:
+    radial-gradient(ellipse at 52% 38%, #25434c 0%, transparent 72%),
+    linear-gradient(125deg, #0c2028 0%, #12333e 48%, #101c30 100%);
   color: #e3ecee;
   box-shadow: 0 12px 36px rgba(45, 54, 52, 0.04);
 }
 
 .connect-panel {
-  background: #2d3634;
+  background:
+   radial-gradient(ellipse at 52% 38%, #25434c 0%, transparent 72%),
+   linear-gradient(125deg, #0c2028 0%, #12333e 48%, #101c30 100%);;
 }
 
 .contact-layout h3 {
@@ -888,7 +1056,9 @@ address {
   position: relative;
   padding: 110px 6.3vw 120px;
   color: #e3ecee;
-  background: #2d3634;
+  background:
+    radial-gradient(ellipse at 52% 38%, #25434c 0%, transparent 72%),
+    linear-gradient(125deg, #0c2028 0%, #12333e 48%, #101c30 100%);
   font-family: "Jost", "Century Gothic", "Segoe UI", sans-serif;
 }
 
@@ -947,6 +1117,25 @@ address {
   line-height: 1.4;
 }
 
+/* Homepage publication typography: 20% smaller for a softer transition from Bio. */
+.home-page .latest-label,
+.home-page .latest-year {
+  font-size: 20.8px;
+}
+
+.home-page .latest-content h3 {
+  font-size: 22.4px;
+}
+
+/* Match homepage sizing across publication entries. */
+.publication-view .publication-group .latest-year {
+  font-size: 20.8px;
+}
+
+.publication-view .publication-group .latest-content h3 {
+  font-size: 22.4px;
+}
+
 .latest-content article p {
   margin: 0;
   font-size: 18px;
@@ -987,6 +1176,14 @@ address {
 
   .latest-content h3 {
     font-size: 24px;
+  }
+
+  .home-page .latest-content h3 {
+    font-size: 19.2px;
+  }
+
+  .publication-view .publication-group .latest-content h3 {
+    font-size: 19.2px;
   }
 }
 
@@ -1464,7 +1661,167 @@ address {
   text-align: center;
 }
 
-.about-page-main{background:#fff;color:#2d3634}.about-hero{display:grid;grid-template-columns:minmax(260px,360px) 1fr;gap:clamp(42px,6vw,90px);align-items:center;padding:76px 7vw 82px;background:linear-gradient(105deg,#22271c 0%,#414e43 34%,#4e5c51 62%,#303929 100%);color:#fff}.about-portrait{width:100%;aspect-ratio:1/1.08;overflow:hidden;border:1px solid rgba(255,255,255,.55);border-radius:28px;box-shadow:0 24px 52px rgba(0,0,0,.2)}.about-portrait img{width:100%;height:100%;object-fit:cover;object-position:center 28%}.about-kicker{margin:0 0 18px;color:#ffca55;font-size:15px;letter-spacing:.16em;text-transform:uppercase}.about-hero h1{margin:0 0 24px;color:#ffca55;font-family:"Libre Caslon Display",Georgia,serif;font-size:clamp(54px,6vw,92px);font-weight:400;line-height:.98}.about-tagline{max-width:760px;color:#9ee8ff;font-family:"Libre Caslon Display",Georgia,serif;font-size:clamp(24px,2.2vw,34px);line-height:1.3}.about-facts{display:flex;flex-wrap:wrap;gap:16px 28px;margin-top:30px;color:#e3ecee;font-family:"Jost",sans-serif;font-size:17px}.about-profile-links{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}.about-profile-links a{padding:11px 18px;border:1px solid #9ee8ff;border-radius:6px;color:#9ee8ff;font-size:16px}.about-profile-links a:hover{background:#ffca55;border-color:#ffca55;color:#2d3634}.about-summary{max-width:1180px;margin:0 auto;padding:78px 7vw 70px;font-family:"Jost",sans-serif}.about-summary p{margin:0 0 24px;font-size:20px;line-height:1.7}.about-summary p:first-child{color:#2d3634;font-size:27px}.about-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:0 7vw 86px}.about-cards article{min-height:178px;padding:28px 30px;border:1px solid #46524e;border-radius:18px;background:#2d3634;color:#e3ecee}.about-cards span{color:#ffca55;font-size:13px;letter-spacing:.15em;text-transform:uppercase}.about-cards h2{margin:16px 0 10px;color:#fff;font-family:"Libre Caslon Display",Georgia,serif;font-size:28px;font-weight:400}.about-cards p{margin:0;color:#c4d2cd;font-family:"Jost",sans-serif;font-size:17px;line-height:1.5}@media(max-width:760px){.about-hero{grid-template-columns:1fr;padding:52px 7vw 64px}.about-portrait{width:min(360px,100%);margin:auto}.about-cards{grid-template-columns:1fr}}
+.about-page-main{
+  background:#fff;
+  color:#2d3634
+}
+
+.about-hero{
+  display:grid;
+  grid-template-columns:minmax(260px,360px) 1fr;
+  gap:clamp(42px,6vw,90px);
+  align-items:center;
+  padding:76px 7vw 82px;
+  background:linear-gradient(105deg,#22271c 0%,#414e43 34%,#4e5c51 62%,#303929 100%);
+  color:#fff
+}
+
+.about-portrait{
+  width:100%;
+  aspect-ratio:1/1.08;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.55);
+  border-radius:28px;
+  box-shadow:0 24px 52px rgba(0,0,0,.2)
+}
+
+.about-portrait img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 28%
+}
+
+.about-kicker{
+  margin:0 0 18px;
+  color:#ffca55;
+  font-size:15px;
+  letter-spacing:.16em;
+  text-transform:uppercase
+}
+
+.about-hero h1{
+  margin:0 0 24px;
+  color:#ffca55;
+  font-family:"Libre Caslon Display",Georgia,serif;
+  font-size:clamp(54px,6vw,92px);
+  font-weight:400;
+  line-height:.98
+}
+
+.about-tagline{
+  max-width:760px;
+  color:#9ee8ff;
+  font-family:"Libre Caslon Display",Georgia,serif;
+  font-size:clamp(24px,2.2vw,34px);
+  line-height:1.3
+}
+
+.about-facts{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px 28px;
+  margin-top:30px;
+  color:#e3ecee;
+  font-family:"Jost",sans-serif;
+  font-size:17px
+}
+
+.about-profile-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-top:34px
+}
+
+.about-profile-links a{
+  padding:11px 18px;
+  border:1px solid #9ee8ff;
+  border-radius:6px;
+  color:#9ee8ff;
+  font-size:16px
+}
+
+.about-profile-links a:hover{
+  background:#ffca55;
+  border-color:#ffca55;
+  color:#2d3634
+}
+
+.about-summary{
+  max-width:1180px;
+  margin:0 auto;
+  padding:78px 7vw 70px;
+  font-family:"Jost",sans-serif
+}
+
+.about-summary p{
+  margin:0 0 24px;
+  font-size:20px;
+  line-height:1.7
+}
+
+.about-summary p:first-child{
+  color:#2d3634;
+  font-size:27px
+}
+
+.about-cards{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+  padding:0 7vw 86px
+}
+
+.about-cards article{
+  min-height:178px;
+  padding:28px 30px;
+  border:1px solid #46524e;
+  border-radius:18px;
+  background:#2d3634;
+  color:#e3ecee
+}
+
+.about-cards span{
+  color:#ffca55;
+  font-size:13px;
+  letter-spacing:.15em;
+  text-transform:uppercase
+}
+
+.about-cards h2{
+  margin:16px 0 10px;
+  color:#fff;
+  font-family:"Libre Caslon Display",Georgia,serif;
+  font-size:28px;
+  font-weight:400
+}
+
+.about-cards p{
+  margin:0;
+  color:#c4d2cd;
+  font-family:"Jost",sans-serif;
+  font-size:17px;
+  line-height:1.5
+}
+
+@media(max-width:760px){
+  .about-hero{
+    grid-template-columns:1fr;
+    padding:52px 7vw 64px
+  }
+
+  .about-portrait{
+    width:min(360px,100%);
+    margin:auto
+  }
+
+  .about-cards{
+    grid-template-columns:1fr
+  }
+
+}
+
 
 /* Research Page
    Styles below control research.html. */
@@ -1965,9 +2322,6 @@ address {
   .expertise-columns { grid-template-columns: 1fr; gap: 34px; }
 }
 .about-editorial-intro { max-width: 1030px; margin: 0; font-size: 22px; line-height: 1.55; }
-.research-editorial .about-editorial-intro + .about-editorial-intro {
-  margin-top: 24px;
-}
 
 /* Research projects share Academic History's dark background and typography. */
 .research-editorial + .section-divider {
@@ -2033,6 +2387,14 @@ address {
   color: #c4d2cd;
   font-size: 20px;
   line-height: 1.65;
+}
+
+.project-copy p + p {
+  margin-top: 20px;
+}
+
+.project-copy .project-areas {
+  color: #9ee8ff;
 }
 
 .project-read-more {
@@ -2104,3 +2466,38 @@ address {
 .timeline-content > p:last-child { margin:0; color:#c4d2cd; font-size:17px; line-height:1.75; }
 @media(max-width:700px){.timeline-entry{grid-template-columns:1fr;gap:12px}.timeline-marker{display:none}.timeline-label{font-size:15px}.timeline-rule{margin-bottom:28px}}
 @media (max-width: 700px) { .about-experience { padding: 68px 7vw 76px; } .about-experience p { font-size: 18px; } }
+
+/* Keep every navbar in sync with the homepage palette, including legacy CV. */
+.site-header.site-header {
+  background: var(--header-background);
+  border-bottom-color: rgba(182, 206, 200, 0.18);
+  box-shadow: 0 18px 54px rgba(4, 15, 24, 0.16);
+}
+
+.site-header .brand-copy strong,
+.site-header .brand-copy span,
+.site-header .site-nav,
+.site-header .site-nav a {
+  color: var(--header-text);
+}
+
+.site-header .site-nav a:hover,
+.site-header .site-nav a:last-child:hover,
+.site-header .site-nav a:focus-visible {
+  color: var(--header-hover);
+}
+
+/* Shared gradient for alternating dark content sections. */
+.latest-publication,
+.projects-section,
+.about-experience,
+.about-timeline,
+.publication-view .publication-list-section {
+  background: var(--section-background);
+}
+
+/* Blend the contact notch with the dark section immediately above it. */
+.home-contact .contact-dip path,
+.awards-section + .home-contact .contact-dip path {
+  fill: #15313b;
+}
